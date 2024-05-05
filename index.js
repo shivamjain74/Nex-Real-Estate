@@ -7,14 +7,10 @@ import cookieParser from 'cookie-parser';
 import listingRouter from './api/routes/listing.route.js';
 import cors from 'cors';
 
-app.use(cors({
-    origin: true,
-    credentials: true
-}));
 dotenv.config();
 
 mongoose.connect(process.env.MONGO).then(()=>{
-   console.log('Connected to MongoDB!');
+    console.log('Connected to MongoDB!');
 }).catch((err)=>{
     console.log(err);
 });
@@ -22,6 +18,10 @@ mongoose.connect(process.env.MONGO).then(()=>{
 
 
 const app = express();
+app.use(cors({
+    origin: true,
+    credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
