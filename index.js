@@ -26,6 +26,17 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+    // Set Cross-Origin Opener Policy (COOP)
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+
+    // Set Cross-Origin Embedder Policy (COEP)
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+
+    // Call the next middleware in the chain
+    next();
+});
+
 app.listen(3000,()=>{
     console.log("Server is running on port 3000!");
 });
