@@ -1,4 +1,5 @@
 import express from 'express';
+const app = express();
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './api/routes/user.route.js';
@@ -9,22 +10,27 @@ import cors from 'cors';
 
 dotenv.config();
 
+
+
+
+
+app.use(cookieParser());  // to get the infor from the cookie
+
+app.use(cors({
+    // origin: 'http://localhost:5173',
+    origin:'https://nex-estate-frontend.vercel.app',
+    credentials: true,
+}));
+
+
+app.use(express.json()); // to use any json file as a input to server otherwise get undefined 
+
 mongoose.connect(process.env.MONGO).then(()=>{
     console.log('Connected to MongoDB!');
 }).catch((err)=>{
     console.log(err);
 });
 
-
-
-const app = express();
-app.use(cors({
-    origin: true,
-    credentials: true
-}));
-
-app.use(express.json());
-app.use(cookieParser());
 
 app.use((req, res, next) => {
     // Set Cross-Origin Opener Policy (COOP)
@@ -34,13 +40,14 @@ app.use((req, res, next) => {
     res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
 
     // Call the next middleware in the chain
-    next();
+next();
 });
 
 app.listen(3000,()=>{
     console.log("Server is running on port 3000!");
 });
 
+// all the routers are in index.js 
 app.use("/api/user",userRouter);
 app.use('/api/auth',authRouter);
 app.use('/api/listing',listingRouter);

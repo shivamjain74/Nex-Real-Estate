@@ -28,6 +28,7 @@ avatar:{
 
 );
 
-const User = mongoose.model('User',userSchema);
+const User = mongoose.model('User',userSchema); // .model and .Schema are two methods inside mongodb
+// same name 'User' is created in mongodb with Users named
 
-export default User;
+export default User; // to able to use this model anywhere else in the application

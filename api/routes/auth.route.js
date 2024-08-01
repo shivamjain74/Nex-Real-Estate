@@ -3,6 +3,7 @@ import { google, signOut, signin, signup } from '../controllers/auth.controller.
 
 const router=express.Router();
 
+// separate router for authentication
 router.post("/signup",signup); // new user register
 router.post("/signin",signin); // already register user
 router.post("/google",google);
