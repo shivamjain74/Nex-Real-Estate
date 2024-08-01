@@ -3,10 +3,13 @@ import User from "../models/user.model.js";
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from 'bcryptjs';
 
+// controllers call the logic
+
 export const  test = (req,res)=>{   // controller is to control the api call
-    res.json({message:'Api route is working!'});
+    res.send('Hello world');
 
 };
+
 
 export const updateUser = async (req, res, next) => {
     if (req.user.id !== req.params.id)
@@ -47,7 +50,7 @@ try {
     res.status(200).json('user has been deleted!');
 } catch (error) {
      next(error)
-}
+} 
 };
 
 export const getUserListings = async (req, res, next) => {
